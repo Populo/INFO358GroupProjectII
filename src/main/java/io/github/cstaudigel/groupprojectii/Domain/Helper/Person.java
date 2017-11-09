@@ -7,6 +7,13 @@ public abstract class Person
     private String Username;
     private String Password;
 
+    public Person(String fname, String lname, String uname, String password) {
+        Firstname = fname;
+        Lastname = lname;
+        Username = uname;
+        Password = password;
+    }
+
     public String getFirstname() {
         return Firstname;
     }

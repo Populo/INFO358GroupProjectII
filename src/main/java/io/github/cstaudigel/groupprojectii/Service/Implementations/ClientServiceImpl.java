@@ -20,21 +20,22 @@ public class ClientServiceImpl implements ClientService {
      * returns client from database by username
      *
      * @param username
-     * @return
+     * @return Client
      */
     @Override
     public Client getClient(String username) {
-        return null;
+        return clientDAO.getClient(username);
     }
 
     /**
      * creates client in database
      *
      * @param c
+     * @return Client
      */
     @Override
-    public void createClient(Client c) {
-
+    public Client createClient(Client c) {
+        return clientDAO.createClient(c);
     }
 
     /**
@@ -43,9 +44,10 @@ public class ClientServiceImpl implements ClientService {
      * probably will just delete old, add new unless UPDATE works as expected
      *
      * @param c
+     * @return Client
      */
     @Override
-    public void modifyClient(Client c) {
-
+    public Client modifyClient(Client c) {
+        return clientDAO.updateClient(c);
     }
 }

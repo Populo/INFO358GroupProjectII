@@ -8,7 +8,7 @@ public interface ClientService {
      * returns client from database by username
      *
      * @param username
-     * @return
+     * @return Client
      */
     Client getClient(String username);
 
@@ -16,8 +16,9 @@ public interface ClientService {
      * creates client in database
      *
      * @param c
+     * @return Client
      */
-    void createClient(Client c);
+    Client createClient(Client c);
 
 
     /**
@@ -26,8 +27,9 @@ public interface ClientService {
      * probably will just delete old, add new unless UPDATE works as expected
      *
      * @param c
+     * @return Client
      */
-    void modifyClient(Client c);
+    Client modifyClient(Client c);
 
 
 

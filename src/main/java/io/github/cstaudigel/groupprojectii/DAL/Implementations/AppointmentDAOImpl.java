@@ -7,7 +7,6 @@ import io.github.cstaudigel.groupprojectii.Domain.Objects.Stylist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Date;
 import java.util.List;
@@ -118,6 +117,6 @@ public class AppointmentDAOImpl implements AppointmentDAO {
         ));
 */
 
-        throw new NotImplementedException();
+        return null;
     }
 }
