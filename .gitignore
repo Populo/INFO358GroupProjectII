@@ -1,3 +1,5 @@
+build/
+*.iml
 
 # Created by https://www.gitignore.io/api/java,linux,intellij+all,visualstudiocode
 
