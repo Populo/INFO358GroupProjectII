@@ -1,9 +1,12 @@
+.idea/
 build/
 *.iml
-.gradle/
-# Created by https://www.gitignore.io/api/java,linux,intellij+all,visualstudiocode
+gradle/
+.gradle/3.4/
 
-### Intellij+all ###
+# Created by https://www.gitignore.io/api/java,linux,gradle,intellij+iml,visualstudiocode
+
+### Intellij+iml ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
@@ -57,11 +60,13 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-### Intellij+all Patch ###
-# Ignores the whole idea folder
-# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
+### Intellij+iml Patch ###
+# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
 
-.idea/
+*.iml
+modules.xml
+.idea/misc.xml
+*.ipr
 
 ### Java ###
 # Compiled class file
@@ -110,4 +115,21 @@ hs_err_pid*
 !.vscode/extensions.json
 .history
 
-# End of https://www.gitignore.io/api/java,linux,intellij+all,visualstudiocode
+### Gradle ###
+.gradle
+**/build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+
+# End of https://www.gitignore.io/api/java,linux,gradle,intellij+iml,visualstudiocode
+
