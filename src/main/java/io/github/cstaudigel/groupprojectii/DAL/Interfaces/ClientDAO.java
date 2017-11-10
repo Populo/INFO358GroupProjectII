@@ -10,7 +10,7 @@ public interface ClientDAO {
      * @param username
      * @return
      */
-    Client getClient(String username);
+    Client getClientByUsername(String username);
 
 
     /**
@@ -28,4 +28,12 @@ public interface ClientDAO {
      * @return
      */
     Client updateClient(Client c);
+
+    /**
+     * deletes client from db
+     *
+     * @param c
+     * @return
+     */
+    Client deleteClient(Client c);
 }

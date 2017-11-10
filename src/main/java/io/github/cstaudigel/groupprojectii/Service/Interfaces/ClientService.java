@@ -10,7 +10,7 @@ public interface ClientService {
      * @param username
      * @return Client
      */
-    Client getClient(String username);
+    Client getClientByUsername(String username);
 
     /**
      * creates client in database

@@ -19,16 +19,16 @@ public class ClientDAOImpl implements ClientDAO {
      * @return
      */
     @Override
-    public Client getClient(String username) {
+    public Client getClientByUsername(String username) {
         String sql = "SELECT * FROM CLIENT WHERE C_USERNAME = ?";
 
         List<Client> clients = jdbcTemplate.query(sql, new Object[] {username},
                 (rs, rowNum) -> (
                         new Client(
-                            rs.getString("S_FIRSTNAME"),
-                                rs.getString("S_LASTNAME"),
-                                rs.getString("S_USERNAME"),
-                                rs.getString("S_PASSWORD"))));
+                                rs.getString("C_FIRSTNAME"),
+                                rs.getString("C_LASTNAME"),
+                                rs.getString("C_USERNAME"),
+                                rs.getString("C_PASSWORD"))));
 
         if (!clients.isEmpty()) return clients.get(0);
         else return null;
@@ -42,16 +42,13 @@ public class ClientDAOImpl implements ClientDAO {
      */
     @Override
     public Client createClient(Client c) {
-        Client tempClient = getClient(c.getUsername());
 
-        if (tempClient == null) {
-            String sql = "INSERT INTO CLIENT (S_FIRSTNAME, S_LASTNAME, S_USERNAME, S_PASSWORD) " +
+        String sql = "INSERT INTO CLIENT (S_FIRSTNAME, S_LASTNAME, S_USERNAME, S_PASSWORD) " +
                     "VALUES (?, ?, ?, ?);";
 
-            jdbcTemplate.update(sql, new Object[]{c.getFirstname(), c.getLastname(), c.getUsername(), c.getPassword()});
+        jdbcTemplate.update(sql, new Object[]{c.getFirstname(), c.getLastname(), c.getUsername(), c.getPassword()});
 
-            return c;
-        } else return null;
+        return c;
     }
 
     /**
@@ -62,10 +59,26 @@ public class ClientDAOImpl implements ClientDAO {
      */
     @Override
     public Client updateClient(Client c) {
+
+        deleteClient(c);
+
+        createClient(c);
+
+        return c;
+    }
+
+    /**
+     * deletes client from db
+     *
+     * @param c
+     * @return
+     */
+    @Override
+    public Client deleteClient(Client c) {
         String delete = "DELETE FROM CLIENT WHERE C_USERNAME = ?";
 
         jdbcTemplate.update(delete, new Object[] {c.getUsername()});
 
-        return createClient(c);
+        return c;
     }
 }

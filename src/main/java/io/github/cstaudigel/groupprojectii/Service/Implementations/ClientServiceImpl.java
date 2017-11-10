@@ -23,8 +23,8 @@ public class ClientServiceImpl implements ClientService {
      * @return Client
      */
     @Override
-    public Client getClient(String username) {
-        return clientDAO.getClient(username);
+    public Client getClientByUsername(String username) {
+        return clientDAO.getClientByUsername(username);
     }
 
     /**
@@ -35,7 +35,10 @@ public class ClientServiceImpl implements ClientService {
      */
     @Override
     public Client createClient(Client c) {
-        return clientDAO.createClient(c);
+        Client tempClient = getClientByUsername(c.getUsername());
+
+        if (tempClient == null) return clientDAO.createClient(c);
+        else return null;
     }
 
     /**
