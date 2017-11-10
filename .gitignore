@@ -2,7 +2,7 @@
 build/
 *.iml
 gradle/
-.gradle/3.4/
+.gradle/
 
 # Created by https://www.gitignore.io/api/java,linux,gradle,intellij+iml,visualstudiocode
 
