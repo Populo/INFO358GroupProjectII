@@ -4,10 +4,11 @@ import io.github.cstaudigel.groupprojectii.DAL.Interfaces.ClientDAO;
 import io.github.cstaudigel.groupprojectii.Domain.Objects.Client;
 import io.github.cstaudigel.groupprojectii.Service.Interfaces.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ClientServiceImpl implements ClientService {
 
-    @Autowired
     private ClientDAO clientDAO;
 
     @Autowired

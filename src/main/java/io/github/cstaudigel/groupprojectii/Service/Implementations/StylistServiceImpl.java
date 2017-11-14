@@ -4,15 +4,15 @@ import io.github.cstaudigel.groupprojectii.DAL.Interfaces.StylistDAO;
 import io.github.cstaudigel.groupprojectii.Domain.Objects.Stylist;
 import io.github.cstaudigel.groupprojectii.Service.Interfaces.StylistService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * created by chris on 11/9/17
  */
 
-
+@Component
 public class StylistServiceImpl implements StylistService {
 
-    @Autowired
     private StylistDAO stylistDAO;
 
     @Autowired

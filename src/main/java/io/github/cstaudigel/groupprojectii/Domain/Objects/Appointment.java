@@ -1,5 +1,9 @@
 package io.github.cstaudigel.groupprojectii.Domain.Objects;
 
+import io.github.cstaudigel.groupprojectii.DAL.Interfaces.AppointmentDAO;
+import io.github.cstaudigel.groupprojectii.Service.Implementations.ClientServiceImpl;
+import io.github.cstaudigel.groupprojectii.Service.Interfaces.ClientService;
+
 import java.sql.Date;
 
 public class Appointment {
@@ -8,11 +12,32 @@ public class Appointment {
     private Date dateTime;
     private Service service;
 
+    private String stylistUsername, clientUsername, serviceCode;
+
     public Appointment(Stylist stylist, Client client, Date dateTime, Service service) {
         this.stylist = stylist;
         this.client = client;
         this.dateTime = dateTime;
         this.service = service;
+    }
+
+    public Appointment(String stylistUsername, String clientUsername, Date dateTime, String serviceCode) {
+        this.stylistUsername = stylistUsername;
+        this.clientUsername = clientUsername;
+        this.serviceCode = serviceCode;
+        this.dateTime = dateTime;
+    }
+
+    public String getStylistUsername() {
+        return stylistUsername;
+    }
+
+    public String getClientUsername() {
+        return clientUsername;
+    }
+
+    public String getServiceCode() {
+        return serviceCode;
     }
 
     public Stylist getStylist() {

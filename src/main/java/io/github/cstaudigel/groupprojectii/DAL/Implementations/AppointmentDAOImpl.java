@@ -1,20 +1,34 @@
 package io.github.cstaudigel.groupprojectii.DAL.Implementations;
 
 import io.github.cstaudigel.groupprojectii.DAL.Interfaces.AppointmentDAO;
+import io.github.cstaudigel.groupprojectii.DAL.Interfaces.ClientDAO;
+import io.github.cstaudigel.groupprojectii.DAL.Interfaces.StylistDAO;
 import io.github.cstaudigel.groupprojectii.Domain.Objects.Appointment;
 import io.github.cstaudigel.groupprojectii.Domain.Objects.Client;
 import io.github.cstaudigel.groupprojectii.Domain.Objects.Stylist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
+@Component
+@Repository
 public class AppointmentDAOImpl implements AppointmentDAO {
 
+    private JdbcTemplate jdbcTemplate;
+    private ClientDAO clientDAO;
+    private StylistDAO stylistDAO;
+
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    public AppointmentDAOImpl(JdbcTemplate jdbcTemplate, ClientDAO clientDAO, StylistDAO stylistDAO) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.clientDAO = clientDAO;
+        this.stylistDAO = stylistDAO;
+    }
 
     /**
      * add Appointment to database
@@ -22,7 +36,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
      * @param a
      */
     @Override
-    public void CreateAppointment(Appointment a) {
+    public Appointment createAppointment(Appointment a) {
         String sql = "INSERT INTO APPOINTMENT (A_STYLIST, A_CLIENT, A_SERVICE, A_TIME) VALUES (?, ?, ?, ?);";
 
         jdbcTemplate.update(sql, new Object[] {
@@ -31,16 +45,8 @@ public class AppointmentDAOImpl implements AppointmentDAO {
            a.getService().getName(),
            a.getDateTime()
         });
-    }
 
-    /**
-     * get all appointment at specified time
-     *
-     * @param time
-     */
-    @Override
-    public Appointment GetAppointmentAtTime(Date time) {
-        return null;
+        return a;
     }
 
     /**
@@ -49,19 +55,22 @@ public class AppointmentDAOImpl implements AppointmentDAO {
      * @param day
      */
     @Override
-    public List<Appointment> GetAppointmentsOnDay(Date day) {
-        return null;
-    }
+    public List<Appointment> getAppointmentsOnDay(Date day) {
+        List<Appointment> appointments;
 
-    /**
-     * get appointments at specific time for specific sylist
-     *
-     * @param s
-     * @param time
-     */
-    @Override
-    public Appointment GetAppointmentAtTimeForStylist(Stylist s, Date time) {
-        return null;
+        String sql = "SELECT * FROM APPOINTMENT WHERE A_TIME = ?";
+
+        Object[] inputs = new Object[] {day};
+
+        appointments = jdbcTemplate.query(sql, inputs,
+                (rs, rowNum) -> new Appointment(
+                        rs.getString("A_STYLIST"),
+                        rs.getString("A_CLIENT"),
+                        rs.getDate("A_TIME"),
+                        rs.getString("A_SERVICE")
+                ));
+
+        return appointments;
     }
 
     /**
@@ -71,8 +80,22 @@ public class AppointmentDAOImpl implements AppointmentDAO {
      * @param time
      */
     @Override
-    public List<Appointment> GetAppointmentsOnDayForStylist(Stylist s, Date time) {
-        return null;
+    public List<Appointment> getAppointmentsOnDayForStylist(Stylist s, Date time) {
+        List<Appointment> appointments;
+
+        String sql = "SELECT * FROM APPOINTMENT WHERE A_TIME = ? AND A_STYLIST = ?";
+
+        Object[] inputs = new Object[] {time, s.getUsername()};
+
+        appointments = jdbcTemplate.query(sql, inputs,
+                (rs, rowNum) -> new Appointment(
+                        rs.getString("A_STYLIST"),
+                        rs.getString("A_CLIENT"),
+                        rs.getDate("A_TIME"),
+                        rs.getString("A_SERVICE")
+                ));
+
+        return appointments;
     }
 
     /**
@@ -81,8 +104,22 @@ public class AppointmentDAOImpl implements AppointmentDAO {
      * @param s
      */
     @Override
-    public List<Appointment> GetFutureAppointmentsForStylist(Stylist s) {
-        return null;
+    public List<Appointment> getFutureAppointmentsForStylist(Stylist s, Date time) {
+        List<Appointment> appointments;
+
+        String sql = "SELECT * FROM APPOINTMENT WHERE A_TIME > ? AND A_STYLIST = ?";
+
+        Object[] inputs = new Object[] {time, s.getUsername()};
+
+        appointments = jdbcTemplate.query(sql, inputs,
+                (rs, rowNum) -> new Appointment(
+                        rs.getString("A_STYLIST"),
+                        rs.getString("A_CLIENT"),
+                        rs.getDate("A_TIME"),
+                        rs.getString("A_SERVICE")
+                ));
+
+        return appointments;
     }
 
     /**
@@ -91,8 +128,22 @@ public class AppointmentDAOImpl implements AppointmentDAO {
      * @param s
      */
     @Override
-    public List<Appointment> GetPastAppointmentsForStylist(Stylist s) {
-        return null;
+    public List<Appointment> getPastAppointmentsForStylist(Stylist s, Date time) {
+        List<Appointment> appointments;
+
+        String sql = "SELECT * FROM APPOINTMENT WHERE A_TIME < ? AND A_STYLIST = ?";
+
+        Object[] inputs = new Object[] {time, s.getUsername()};
+
+        appointments = jdbcTemplate.query(sql, inputs,
+                (rs, rowNum) -> new Appointment(
+                        rs.getString("A_STYLIST"),
+                        rs.getString("A_CLIENT"),
+                        rs.getDate("A_TIME"),
+                        rs.getString("A_SERVICE")
+                ));
+
+        return appointments;
     }
 
     /**
@@ -101,22 +152,69 @@ public class AppointmentDAOImpl implements AppointmentDAO {
      * @param s
      */
     @Override
-    public List<Appointment> GetAllAppointmentsForStylist(Stylist s) {
+    public List<Appointment> getAllAppointmentsForStylist(Stylist s) {
         List<Appointment> appointments;
-        // TODO Serivce call to get client
-        // TODO Service call to get service
 
         String sql = "SELECT * FROM APPOINTMENT, STYLIST WHERE STYLIST.S_USERNAME = ?";
 
         Object[] inputs = new Object[] {s.getUsername()};
 
-/*
+
         appointments = jdbcTemplate.query(sql, inputs,
-                (rs, rowNum) -> new Appointment()
+                (rs, rowNum) -> new Appointment(
+                        rs.getString("A_STYLIST"),
+                        rs.getString("A_CLIENT"),
+                        rs.getDate("A_TIME"),
+                        rs.getString("A_SERVICE")
+                ));
 
-        ));
-*/
+        return appointments;
+    }
 
-        return null;
+    /**
+     * get all appointments before specified day from db
+     * @param time
+     * @return
+     */
+    @Override
+    public List<Appointment> getAppointmentsBeforeDay(Date time) {
+        List<Appointment> appointments;
+
+        String sql = "SELECT * FROM APPOINTMENT WHERE A_TIME < ?";
+
+        Object[] inputs = new Object[] {time};
+
+        appointments = jdbcTemplate.query(sql, inputs,
+                (rs, rowNum) -> new Appointment(
+                        rs.getString("A_STYLIST"),
+                        rs.getString("A_CLIENT"),
+                        rs.getDate("A_TIME"),
+                        rs.getString("A_SERVICE")
+                ));
+
+        return appointments;
+    }
+
+    /**
+     * get all appointments after specified day
+     * @param time
+     * @return
+     */
+    public List<Appointment> getAppointmentsAfterDay(Date time) {
+        List<Appointment> appointments;
+
+        String sql = "SELECT * FROM APPOINTMENT WHERE A_TIME > ?";
+
+        Object[] inputs = new Object[] {time};
+
+        appointments = jdbcTemplate.query(sql, inputs,
+                (rs, rowNum) -> new Appointment(
+                        rs.getString("A_STYLIST"),
+                        rs.getString("A_CLIENT"),
+                        rs.getDate("A_TIME"),
+                        rs.getString("A_SERVICE")
+                ));
+
+        return appointments;
     }
 }
