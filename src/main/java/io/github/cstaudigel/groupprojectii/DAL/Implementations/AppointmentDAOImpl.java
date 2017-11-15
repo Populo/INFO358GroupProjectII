@@ -67,7 +67,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
                         rs.getString("A_STYLIST"),
                         rs.getString("A_CLIENT"),
                         rs.getDate("A_TIME"),
-                        rs.getString("A_SERVICE")
+                        rs.getInt("A_SERVICE")
                 ));
 
         return appointments;
@@ -92,7 +92,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
                         rs.getString("A_STYLIST"),
                         rs.getString("A_CLIENT"),
                         rs.getDate("A_TIME"),
-                        rs.getString("A_SERVICE")
+                        rs.getInt("A_SERVICE")
                 ));
 
         return appointments;
@@ -116,7 +116,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
                         rs.getString("A_STYLIST"),
                         rs.getString("A_CLIENT"),
                         rs.getDate("A_TIME"),
-                        rs.getString("A_SERVICE")
+                        rs.getInt("A_SERVICE")
                 ));
 
         return appointments;
@@ -140,7 +140,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
                         rs.getString("A_STYLIST"),
                         rs.getString("A_CLIENT"),
                         rs.getDate("A_TIME"),
-                        rs.getString("A_SERVICE")
+                        rs.getInt("A_SERVICE")
                 ));
 
         return appointments;
@@ -165,7 +165,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
                         rs.getString("A_STYLIST"),
                         rs.getString("A_CLIENT"),
                         rs.getDate("A_TIME"),
-                        rs.getString("A_SERVICE")
+                        rs.getInt("A_SERVICE")
                 ));
 
         return appointments;
@@ -189,7 +189,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
                         rs.getString("A_STYLIST"),
                         rs.getString("A_CLIENT"),
                         rs.getDate("A_TIME"),
-                        rs.getString("A_SERVICE")
+                        rs.getInt("A_SERVICE")
                 ));
 
         return appointments;
@@ -212,7 +212,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
                         rs.getString("A_STYLIST"),
                         rs.getString("A_CLIENT"),
                         rs.getDate("A_TIME"),
-                        rs.getString("A_SERVICE")
+                        rs.getInt("A_SERVICE")
                 ));
 
         return appointments;

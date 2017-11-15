@@ -1,4 +1,4 @@
-package io.github.cstaudigel.groupprojectii.Service.Interfaces;
+package io.github.cstaudigel.groupprojectii.DAL.Interfaces;
 
 import io.github.cstaudigel.groupprojectii.Domain.Objects.Service;
 
@@ -7,33 +7,33 @@ import io.github.cstaudigel.groupprojectii.Domain.Objects.Service;
  */
 
 
-public interface ServiceService {
+public interface ServiceDAO {
 
     /**
-     * returns service by code
-     * @param code
+     * create service in database
+     * @param s
      * @return
      */
-    Service getServiceByCode(int code);
+    Service createService(Service s);
 
     /**
-     * updates service in database
+     * update service in database
      * @param newService
      * @return
      */
     Service modifyService(Service newService);
 
     /**
-     * removes service from database
+     * remove service from database
      * @param s
      * @return
      */
     Service removeService(Service s);
 
     /**
-     * creates service in database
-     * @param s
+     * return service from database by code
+     * @param code
      * @return
      */
-    Service createService(Service s);
+    Service getServiceByCode(int code);
 }

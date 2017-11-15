@@ -59,7 +59,8 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     @Override
     public Appointment createAppointment(Appointment a) {
-        return appointmentDAO.createAppointment(a);
+        if (appointmentDAO.getAppointmentsOnDay(a.getDateTime()) != null) return appointmentDAO.createAppointment(a);
+        else return null;
     }
 
     /**

@@ -12,7 +12,8 @@ public class Appointment {
     private Date dateTime;
     private Service service;
 
-    private String stylistUsername, clientUsername, serviceCode;
+    private String stylistUsername, clientUsername;
+    private int serviceCode;
 
     public Appointment(Stylist stylist, Client client, Date dateTime, Service service) {
         this.stylist = stylist;
@@ -21,7 +22,7 @@ public class Appointment {
         this.service = service;
     }
 
-    public Appointment(String stylistUsername, String clientUsername, Date dateTime, String serviceCode) {
+    public Appointment(String stylistUsername, String clientUsername, Date dateTime, int serviceCode) {
         this.stylistUsername = stylistUsername;
         this.clientUsername = clientUsername;
         this.serviceCode = serviceCode;
@@ -36,7 +37,7 @@ public class Appointment {
         return clientUsername;
     }
 
-    public String getServiceCode() {
+    public int getServiceCode() {
         return serviceCode;
     }
 
