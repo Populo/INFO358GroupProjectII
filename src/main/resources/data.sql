@@ -8,7 +8,7 @@ INSERT INTO STYLIST(S_FNAME, S_LNAME, S_USERNAME, S_PASSWORD, S_SPECIALTY, S_EAR
 VALUES ('Jane', 'Doe', 'Stylist1', 'P@ssw0rd.1', 1, 0);
 
 INSERT INTO CLIENT(C_FNAME, C_LNAME, C_USERNAME, C_PASSWORD, C_MAINSTYLIST)
-VALUES('Joe', 'Client', 'Client1', 'P@ssw0rd.1', 'DPettis');
+VALUES('Joe', 'Client', 'Client1', 'P@ssw0rd.1', 'Stylist1');
 
 INSERT INTO APPOINTMENT(A_STYLIST, A_CLIENT, A_SERVICE, A_TIME)
-VALUES('Stylist1', 'Client1', 2, '2017-11-10 12:00:00');
+VALUES('Stylist1', 'Client1', 0, '2017-11-10 12:00:00');
